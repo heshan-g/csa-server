@@ -1,8 +1,10 @@
+import 'dotenv/config';
+import config from "./config/config";
 import { createServer } from "./server";
 
 const app = createServer();
 
-const port = 4000;
+const port = config.application.port;
 
 app
   .listen(port, () => {
