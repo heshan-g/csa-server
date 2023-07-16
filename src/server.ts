@@ -1,13 +1,13 @@
 import express from 'express';
+import routes from './routes';
 
 export const createServer = () => {
   const app = express();
 
-  app.use('/health-check', (_, res) => res.send('Server is healthy'));
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
 
-
-
-  app.use('*', (_, res) => res.status(404).send('Not found'));
+  app.use('/', routes);
 
   return app;
 }
