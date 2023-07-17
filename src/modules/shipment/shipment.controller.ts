@@ -5,7 +5,7 @@ import { ShipmentType } from './shipment.types';
 
 export const createShipment = async (req: Request, res: Response) => {
   try {
-    const newShipment = req.body as ShipmentType;
+    const newShipment = req.body as Omit<ShipmentType, 'status'>;
 
     const shipmentId = await shipmentService.createShipment(newShipment);
 

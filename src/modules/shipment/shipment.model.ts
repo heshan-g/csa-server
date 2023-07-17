@@ -24,6 +24,11 @@ const shipmentSchema = new Schema<ShipmentDocument>(
       type: String,
       required: true,
     },
+    status: {
+      type: String,
+      required: true,
+      default: 'Pending',
+    }
   },
   { timestamps: true }
 );
