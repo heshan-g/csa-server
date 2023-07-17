@@ -20,3 +20,8 @@ export const getShipmentById = async (shipmentId: string) => {
   return shipment?.toObject();
 }
 
+export const getShipmentsByUserId = async (userId: string) => {
+  const shipments = await Shipment.find({ createdBy: userId });
+  return shipments.map((shipment) => shipment?.toObject());
+}
+

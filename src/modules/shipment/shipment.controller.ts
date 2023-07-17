@@ -30,3 +30,15 @@ export const getShipment = async (req: Request, res: Response) => {
   }
 }
 
+export const getShipments = async (req: Request, res: Response) => {
+  try {
+    const shipments = await shipmentService.getShipmentsByUserId(
+      req.locals.user.id
+    );
+
+    res.status(200).json({ shipments });
+  } catch (err) {
+    handleError(err, res);
+  }
+}
+
