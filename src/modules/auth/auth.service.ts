@@ -1,7 +1,7 @@
 import AppError from '../../utils/AppError';
 import { compare } from 'bcrypt';
 import fs from 'fs';
-import jwt from 'jsonwebtoken';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 import path from 'path';
 import * as userService from '../user/user.service';
 import config from '../../config/config';
@@ -82,5 +82,28 @@ export const setRefreshTokenCookie = (res: Response, token: string) => {
     signed: true,
     maxAge: config.application.refreshTokenExpiryInSeconds * 1000,
   });
+};
+
+export const verifyRefreshToken = (refreshToken: string) => {
+  const refreshTokenSecret = config.application.refreshTokenSecret;
+
+  try {
+    const payload = jwt.verify(refreshToken, refreshTokenSecret) as JwtPayload;
+
+    return payload;
+  } catch (error: any) {
+    throw new AppError(401, error.message, error.name);
+  }
+};
+
+export const isRefreshTokenAvailable = async (
+  userId: string,
+  refreshToken?: string
+) => {
+  const filter: { userId: string; refreshToken?: string } = { userId };
+
+  refreshToken && (filter.refreshToken = refreshToken);
+
+  return !!(await RefreshToken.findOne(filter));
 };
 
