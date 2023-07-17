@@ -21,6 +21,11 @@ export const createUser = async (user: UserType) => {
 
 export const getUserByEmail = async (email: string) => {
   const user = await User.findOne({ email });
-  return user?.toObject();
+  return user;
+}
+
+export const getUserById = async (id: string) => {
+  const user = await User.findById(id);
+  return user;
 }
 
