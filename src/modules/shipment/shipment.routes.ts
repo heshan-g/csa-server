@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { createShipment } from './shipment.controller';
+import { createShipment, getShipment } from './shipment.controller';
 import { createShipmentRequestSchema } from './shipment.types';
 import { authenticate, validateRequest } from '../../middleware';
 
@@ -12,6 +12,8 @@ router
     validateRequest(createShipmentRequestSchema),
     createShipment
   );
+
+router.route('/:shipmentId').get(getShipment);
 
 export default router;
 

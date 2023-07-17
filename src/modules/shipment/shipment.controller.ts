@@ -15,3 +15,15 @@ export const createShipment = async (req: Request, res: Response) => {
   }
 }
 
+export const getShipment = async (req: Request, res: Response) => {
+  try {
+    const { shipmentId } = req.params;
+
+    const shipment = await shipmentService.getShipmentById(shipmentId);
+
+    res.status(200).json({ shipment });
+  } catch (err) {
+    handleError(err, res);
+  }
+}
+

@@ -8,3 +8,8 @@ export const createShipment = async (shipment: Omit<ShipmentType, 'status'>) => 
   return createdShipment.toObject()._id;
 }
 
+export const getShipmentById = async (shipmentId: string) => {
+  const shipment = await Shipment.findById(shipmentId);
+  return shipment?.toObject();
+}
+
