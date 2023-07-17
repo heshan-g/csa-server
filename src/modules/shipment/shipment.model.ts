@@ -28,6 +28,12 @@ const shipmentSchema = new Schema<ShipmentDocument>(
       type: String,
       required: true,
       default: 'Pending',
+    },
+    createdBy: {
+      type: String,
+      required: true,
+      ref: 'User',
+      index: true,
     }
   },
   { timestamps: true }

@@ -5,9 +5,12 @@ import { ShipmentType } from './shipment.types';
 
 export const createShipment = async (req: Request, res: Response) => {
   try {
-    const newShipment = req.body as Omit<ShipmentType, 'status'>;
+    const newShipment = req.body as Omit<ShipmentType, 'status' | 'createdBy'>;
 
-    const shipmentId = await shipmentService.createShipment(newShipment);
+    const shipmentId = await shipmentService.createShipment(
+      newShipment,
+      req.locals.user.id,
+    );
 
     res.status(201).json({ shipmentId });
   } catch (err) {

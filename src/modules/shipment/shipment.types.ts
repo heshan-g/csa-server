@@ -8,11 +8,10 @@ export type ShipmentType = {
   recipientAddress: string;
   shipmentDescription: string;
   status: string;
+  createdBy: string;
 }
 
-export interface ShipmentDocument extends Document, ShipmentType {
-  status: string;
-}
+export interface ShipmentDocument extends Document, ShipmentType {}
 
 export const createShipmentRequestSchema = Joi.object({
   senderName: Joi.string().required(),
