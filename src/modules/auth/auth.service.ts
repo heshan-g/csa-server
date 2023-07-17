@@ -68,7 +68,6 @@ export const storeRefreshToken = async (
 
 export const setAccessTokenCookie = (res: Response, token: string) => {
   res.cookie('accessToken', token, {
-    secure: true,
     httpOnly: true,
     signed: true,
     maxAge: config.application.accessTokenExpiryInSeconds * 1000,
@@ -77,7 +76,6 @@ export const setAccessTokenCookie = (res: Response, token: string) => {
 
 export const setRefreshTokenCookie = (res: Response, token: string) => {
   res.cookie('refreshToken', token, {
-    secure: true,
     httpOnly: true,
     signed: true,
     maxAge: config.application.refreshTokenExpiryInSeconds * 1000,
