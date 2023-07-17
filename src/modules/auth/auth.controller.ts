@@ -64,3 +64,23 @@ export const refreshToken = async (req: Request, res: Response) => {
   }
 }
 
+export const logout = async (req: Request, res: Response) => {
+  try {
+    const { refreshToken } = req.signedCookies;
+
+    authService.verifyRefreshToken(refreshToken);
+
+    const userId = await authService.logout(refreshToken);
+
+    const responseMessage = userId
+      ? 'User logged out'
+      : 'User was not logged in';
+
+    authService.deleteCookies(res, 'accessToken', 'refreshToken');
+
+    res.status(200).send(responseMessage);
+  } catch (err) {
+    handleError(err, res);
+  }
+};
+

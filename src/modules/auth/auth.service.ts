@@ -107,3 +107,15 @@ export const isRefreshTokenAvailable = async (
   return !!(await RefreshToken.findOne(filter));
 };
 
+export const logout = async (refreshToken: string) => {
+  return await RefreshToken.findOneAndDelete({
+    refreshToken,
+  });
+};
+
+export const deleteCookies = (res: Response, ...cookieNames: string[]) => {
+  cookieNames.forEach((cookieName) => {
+    res.clearCookie(cookieName);
+  });
+};
+
