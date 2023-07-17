@@ -1,5 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import Joi from 'joi';
+import handleError from '../utils/handleError';
+import AppError from '../utils/AppError';
 
 const validateBody =
   (schema: Joi.ObjectSchema) =>
@@ -8,18 +10,14 @@ const validateBody =
       const { value, error } = schema.validate(req.body, { abortEarly: false });
 
       if (error) {
-        res.status(400).json({
-          ValidationErrors: error.details,
-        });
-
-        return;
+        throw new AppError(400, 'Invalid request', error.details);
       }
 
       Object.assign(req, value);
 
       next();
-    } catch (error) {
-      res.status(400).json(error);
+    } catch (err) {
+      handleError(err, res);
     }
   };
 

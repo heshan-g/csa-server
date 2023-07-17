@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import * as userService from './user.service';
+import handleError from '../../utils/handleError';
 
 export const createUser = async (req: Request, res: Response) => {
   try {
@@ -9,8 +10,7 @@ export const createUser = async (req: Request, res: Response) => {
 
     res.status(201).json({ userId });
   } catch (err) {
-    console.error(err);
-    res.status(500).send('An error occurred in the server');
+    handleError(err, res);
   }
 }
 
