@@ -18,7 +18,6 @@ const shipmentSchema = new Schema<ShipmentDocument>(
     recipientAddress: {
       type: String,
       required: true,
-      unique: true,
     },
     shipmentDescription: {
       type: String,

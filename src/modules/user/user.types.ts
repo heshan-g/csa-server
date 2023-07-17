@@ -19,6 +19,8 @@ export const createUserRequestSchema = Joi.object({
     new RegExp(
       '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$'
     )
+  ).message(
+    '"password" has to be 6 characters long with uppercase, lowercase, number and special characters'
   ),
 });
 
