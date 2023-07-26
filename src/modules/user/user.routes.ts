@@ -7,7 +7,7 @@ const router = Router({ mergeParams: false });
 
 router
   .route('/')
-  .post(authenticate, validateRequest(createUserRequestSchema), createUser);
+  .post(validateRequest(createUserRequestSchema), createUser);
 
 export default router;
 
